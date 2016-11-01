@@ -1,5 +1,5 @@
 # Code2040 Technical Assessment
-# Step 4 - Prefix
+# Step 5 - The dating game
 
 import requests
 import json
@@ -13,8 +13,8 @@ response = requests.post(ENDPOINT1, data = {'token':API_TOKEN})
 dictionary = response.json()
 datestamp = dictionary['datestamp']
 interval = dictionary['interval']
-new_datestamp = datetime.datetime.strptime(datestamp, '%Y-%m-%dT%H:%M:%SZ')
-new_datestamp = new_datestamp + datetime.timedelta(seconds=interval)
-datestamp = new_datestamp.isoformat() + 'Z'
+new_datestamp = datetime.datetime.strptime(datestamp, '%Y-%m-%dT%H:%M:%SZ')# parse string
+new_datestamp = new_datestamp + datetime.timedelta(seconds=interval)       # add interval
+datestamp = new_datestamp.isoformat() + 'Z'                                # convert to string
 response = requests.post(ENDPOINT2, data = {'token':API_TOKEN, 'datestamp':datestamp})
 print(response.text)
